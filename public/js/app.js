@@ -106839,6 +106839,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -106932,7 +106936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         });
                     }).catch(function (error) {
                         if (error.response.status == 422) {
-                            _this4.validationError = error.response.data.errors.name;
+                            _this4.validationError = error.response.data.errors.name[0];
                         }
                     });
                 } else {
@@ -107191,7 +107195,15 @@ var render = function() {
             [
               _vm.success
                 ? _c("el-alert", {
-                    attrs: { title: "success alert", type: "success" }
+                    attrs: { title: "success alert", type: "success" },
+                    domProps: { textContent: _vm._s(_vm.ruleForm.message) }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.validationError
+                ? _c("el-alert", {
+                    attrs: { title: "error alert", type: "error" },
+                    domProps: { textContent: _vm._s(_vm.validationError) }
                   })
                 : _vm._e(),
               _vm._v(" "),

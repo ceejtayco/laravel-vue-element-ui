@@ -45,6 +45,10 @@ class TaskController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $validatedData = $request->validate([
+            'name' => 'unique:tasks',
+        ]);
+        
         $task = Task::find($id);
         $task->name = $request->name;
         $task->description = $request->description;

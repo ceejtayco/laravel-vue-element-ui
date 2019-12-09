@@ -34,7 +34,11 @@
         <el-dialog title="Edit Task" :visible.sync="dialogVisibleEdit" width="40%" :before-close="handleCloseEdit">
             <el-alert v-if="success"
                 title="success alert"
-                type="success">
+                type="success" v-text="ruleForm.message">
+            </el-alert>
+            <el-alert v-if="validationError"
+                title="error alert"
+                type="error" v-text="validationError">
             </el-alert>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px">
             <el-form-item label="Task Name" prop="name">
@@ -180,7 +184,7 @@ export default {
                         });
                     }).catch(error => {
                         if (error.response.status == 422) {
-                            this.validationError = error.response.data.errors.name;
+                            this.validationError = error.response.data.errors.name[0];
                         }
                     });
                 }else{
